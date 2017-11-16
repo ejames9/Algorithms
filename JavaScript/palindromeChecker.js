@@ -10,8 +10,9 @@ Eric James Foster, MIT License.
 function palindrome(str) {
   // Remove all non alphanumeric characters..
   var nonAlNum = /[^0-9a-zA-Z]/g;
+
   if (nonAlNum.test(str)) {
-    str.replace(nonAlNum, "");
+    str = str.replace(nonAlNum, "");
   }
 
   // convert to all lower case..
@@ -20,7 +21,8 @@ function palindrome(str) {
   var count = str.length;
 
   // get the middle character index.
-  var sliceIndex = count / 2;
+  var sliceIndex = Math.floor(count / 2);
+  var prefix     = str.slice(0, sliceIndex)
   var reflection = str.slice(sliceIndex, count);
   var reflectionArr = reflection.split('');
 
@@ -30,12 +32,13 @@ function palindrome(str) {
   }
 
   // Reverse string and regenerate a string..
-  reflection = reflectionArr.join(reflectionArr.reverse());
+  reflectionArr.reverse();
+  reflection = reflectionArr.join('');
 
   // For the finale, check whether or not the remaining string prefix
   // and the reflection string are equal. If they are, we have a
   // palindrome, and will return true. Otherwise, we return false.
-  if (str == reflection) {
+  if (prefix == reflection) {
     return true;
   } else {
     return false;
@@ -44,4 +47,4 @@ function palindrome(str) {
 
 
 
-palindrome("eye");
+palindrome("eye")
