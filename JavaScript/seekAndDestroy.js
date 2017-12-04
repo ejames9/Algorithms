@@ -15,16 +15,16 @@ function log(str) {
 
 // The function..
 function destroyer(arr) {
-  // Get an array containing the arguments following the initial array arguments
-  // only...
+// Get an array containing the arguments following the initial array arguments
+// only...
   var args = [].slice.call(arguments).slice(1),
-  // Filter the input array...
+// Filter the input array...
       resultArr = arr.filter(function(num) {
-  // returning only nums that don't have a positive index in the target
-  // args array. The returned nums will populate the resultArr...
+// returning only nums that don't have a positive index in the target
+// args array. The returned nums will populate the resultArr...
     return args.indexOf(num) == -1;
   })
-  // Return the resultArr.
+// Return the resultArr.
   return resultArr;
 }
 

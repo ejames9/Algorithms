@@ -16,20 +16,20 @@ function log(str) {
 
 // The function
 function mutation(arr) {
-  // Split the second element of the array into a new array of chars...
+// Split the second element of the array into a new array of chars...
   var str = arr[0].toLowerCase(),
       chars = arr[1].toLowerCase();
 
-  // Iterate through the array of characters...
+// Iterate through the array of characters...
   for (var i = 0; i < chars.length; i++) {
-  // check i's index in the given array's first element string.. If the
-  // indexOf function returns -1 for any of the characters, the function will
-  // return false.
+// check i's index in the given array's first element string.. If the
+// indexOf function returns -1 for any of the characters, the function will
+// return false.
     if (str.indexOf(chars[i]) == -1) {
       return false;
     }
   }
-  // If all chars are found, the function will return true.
+// If all chars are found, the function will return true.
   return true;
 }
 
