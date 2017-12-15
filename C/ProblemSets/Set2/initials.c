@@ -23,7 +23,7 @@ void split( char str[], char on[2], char *names[] );
 int main()
 {
   char name[128] = "0";
-
+  
 // Input prompt/validation loop...
   while (nameHasNumber(name))
   {

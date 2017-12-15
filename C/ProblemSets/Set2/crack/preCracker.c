@@ -1,5 +1,5 @@
 /*
-helpers.c
+preCracker.c
 
 Software used to create a shizload of ciphertext hashes from a collection of
 common passwords, and a dictionary...
@@ -14,10 +14,7 @@ Eric James Foster, MIT License..
 #include <stdbool.h>
 
 // import local module...
-// #include "funcs.h"
-
-// Macros..
-#define _GNU_SOURCE
+#include "funcs.h"
 
 // Define a function that Takes a .txt file filled with words (i.e. common
 // passwords), generates a ciphertext and creates a new text file with both
@@ -29,6 +26,8 @@ void generateCipherTextFile( char *passwordFile, char *outputFile, char *salt);
 void generatePaswwordArrayFile( char *passwordFiles[], char *outputFile);
 // Define a boolean that validates a given salt pattern..
 bool isValidSalt();
+// Define a boolean that validates a ciphertext pattern..
+bool isValidCipherText( char *ciphertext );
 
 // The list of possible chars for the ciphertext...
 char *ascii2 =
@@ -37,24 +36,65 @@ char *ascii2 =
 };
 
 // The main thread...
-char * helper( char *salt )
+int main( int argc,  char *argv[] )
 {
+  char *cipherText;
+  char buffer[14];
+  char salt[3];
+// Opening dialogue. If ciphertext is not given via CL argument, prompt the
+// user now..
+  if (argc < 2)
+  {
+    do
+    {
+      printf("Please provide a ciphertext to decipher: ");
+      scanf("%s" , buffer);
+    }
+// Continually prompt the user until they provide a valid ciphertext...
+    while (!isValidCipherText(buffer));
+  }
+  else
+  {
+// Store the command-line argument..
+    cipherText = argv[1];
+// Copy the string into a char list buffer so it may be validated..
+    strcpy(buffer, cipherText);
+
+// Validate the ciphertext..
+    if (!isValidCipherText(buffer))
+    {
+// TODO: Need to figure out a way not to have to repeat myself here...
+      do
+    {
+      printf("Please provide a ciphertext to decipher: ");
+      scanf("%s" , buffer);
+    }
+    while (!isValidCipherText(buffer));
+    }
+  }
+
+//
+  strncpy(salt, buffer, 2);
+
   char *top1000 = "./top1000.txt";
   char *dictionary = "./dictionary.txt";
   char *topTmp = "./topCipherTexts";
   char *dictTmp = "./dictCipherTexts";
   char topCipherTexts[32];
   char dictCipherTexts[32];
-  char header[32];
+  char command[42];
+  char rmCommand[48];
+
 //
   sprintf(topCipherTexts, "%s%s", topTmp, salt);
   sprintf(dictCipherTexts, "%s%s", dictTmp, salt);
-  sprintf(header, "./cipherTexts%s.h", salt);
-
+  sprintf(command, "./cracker %s", buffer);
+  printf("%s\n", command);
+//
   char *passFiles[3] = {topCipherTexts, dictCipherTexts};
 
-
-  printf("Writing 2 files...........................\n\n\n");
+//
+  printf("\033[01;35m\n\nWriting 2 support files...........................\n\n\n");
 
 // Create ciphertext file from top 1000 passwords with a salt of "50"...
   generateCipherTextFile(top1000, topCipherTexts, salt);
@@ -65,12 +105,73 @@ char * helper( char *salt )
 
 // Create a header file containing a variable, `passwds`, that holds an array
 // of arrays of password/ciphertext combos..
-  generatePaswwordArrayFile(passFiles, header);
+  generatePaswwordArrayFile(passFiles, "./cipherTexts.c");
+
+// Progress report...
+  printf("\033[01;35mCleaning up........\n\n");
+// Create unix command to remove temporary ciphertext files...
+  sprintf(rmCommand, "rm %s %s", topCipherTexts, dictCipherTexts);
+// Delete temp files...
+  system(rmCommand);
 
 // Completion report.
-  printf("SUCCESS: All files are complete.\n\n");
+  printf("\033[22;32mSupporting file cipherTexts.c is complete.\n\n");
+  printf("\033[01;35mCompiling with cracker application.....\n\n");
+  printf("\033[0m");
+
+// Now that the helper file is created, We can move on to part 2, the
+// actual cracking of the ciphertext...
+  int result = system("make -B cracker");
+
+  if (result != 0)
+  {
+    printf("\033[01;31m\nERROR: There was a problem(s) compiling the cracker application.\n\n");
+    printf("\033[0m");
+  }
+  else
+  {
+    printf("\033[22;32m\nCompilation Successful...........\n\n");
+    printf("\033[01;35mStarting cracker.........\n\n");
+    printf("\033[0m");
+
+// Run the cracker
+    system(command);
+  }
+
+// All is well.
+  return 0;
+}
+
+
+// This function takes a string as input and verifies whether or not it is
+// of valid ciphertext form...
+bool isValidCipherText( char *ciphertext )
+{
 //
-  return header;
+  int cipherLen = strlen(ciphertext);
+  int asciiLen = strlen(ascii2);
+
+//
+  if (cipherLen == 13 || cipherLen == 14)
+  {
+//
+    for (int i = 0; i < cipherLen; i++)
+    {
+      int j = 0;
+//
+      while (!isSameChar(ciphertext[i], ascii2[j]))
+      {
+//
+        if (j == 64)
+        {
+          return false;
+        }
+        j++;
+      }
+    }
+    return true;
+  }
+  return false;
 }
 
 
@@ -128,7 +229,7 @@ void generateCipherTextFile( char *passwordFile, char *outputFile, char *salt)
         if (fprintf(ciphertexts, "%s, %s\n", password, ciphertext) < 1)
         {
 // Output error message...
-          printf("ERROR: There was a problem writing to %s.....", outputFile);
+          printf("\033[01;31mERROR: There was a problem writing to %s.....\n\n", outputFile);
           break;
         }
       }
@@ -139,14 +240,15 @@ void generateCipherTextFile( char *passwordFile, char *outputFile, char *salt)
     if (f < 1)
     {
 // Output success message with no `s` on file..
-      printf("1 file written.\n");
+      printf("\033[22;32m1 file written.\n");
       f++;
     }
     else
 // Output success message with `s` on file..
     {
-      printf("%d files written.\n", ++f);
+      printf("\033[22;32m%d files written.\n", ++f);
     }
+    printf("\033[0m");
 
 // Close the files.
     fclose(passwords);
@@ -166,9 +268,9 @@ void generatePaswwordArrayFile( char *passwordFiles[], char *outputFile )
   output = fopen(outputFile, "w");
 // Print this at the beginning of the file..
   fprintf(
-    output, "char * passwds[3][1001] = {\n\t//\n\t"
+    output, "//\n//\n//\nchar * passwds[91150][3] = {\n\t//\n\t"
   );
-  printf("Reading from file 1\n");
+  printf("\033[01;35mReading from file 1\n");
 
   int f = 0;
 // Loop through the password files...
@@ -179,7 +281,7 @@ void generatePaswwordArrayFile( char *passwordFiles[], char *outputFile )
     if (f > 0)
     {
       output = fopen(outputFile, "a");
-      printf("Reading from file %d\n", f + 1);
+      printf("\033[01;35mReading from file %d\n\n", f + 1);
     }
 
     int j = 1;
@@ -203,18 +305,25 @@ void generatePaswwordArrayFile( char *passwordFiles[], char *outputFile )
         j++;
       }
     }
+
+    if (i > 0)
+    {
 // Print closing bracket...
-    fprintf(output, "\n}");
+    fprintf(output, "\n};");
+    }
 // Close the files and increment the f count...
     fclose(passwords);
+// Close file..
     fclose(output);
+//
     f++;
   }
 
 // Progress reporting..
-  printf("Writing cipherTexts document..................\n");
+  printf("\033[01;35mWriting cipherTexts document..................\n");
 //
-  printf("cipherTexts document has written successfully.\n");
+  printf("\033[22;32mcipherTexts document has written successfully.\n\n");
+  printf("\033[0m");
 // Increment c.
   c++;
 }
