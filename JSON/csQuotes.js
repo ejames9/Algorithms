@@ -32,45 +32,54 @@ var steveJobsQuotes = [
 
 var csQuotes = [
     {
-        'id': 58,
-        'author': "Edsger Dijkstra",
-        'quote': "The question of whether a computer can think is no more interesting than the question of whether a submarine can swim."},
-    {
-        'id': 57,
-        'author': "Steve Jobs",
-        'quote': "Why join the navy if you can be a pirate?"},
-    {
-        'id': 56,
-        'author': "Alan Kay",
-        'quote': "I don't know how many of you have ever met Dijkstra, but you probably know that arrogance in computer science is measured in nano-Dijkstras."},
-    {
-        'id': 55,
-        'author': "C.A.R. Hoare",
-        'quote': "The most important property of a program is whether it accomplishes the intention of its user."},
-    {
-        'id': 54,
-        'author': "Nick Black",
-        'quote': "...if you aren't, at any given time, scandalized by code you wrote five or even three years ago, you're not learning anywhere near enough"},
-    {
-        'id': 53,
-        'author': "Alan Perlis",
-        'quote': "Is it possible that software is not like anything else, that it is meant to be discarded: that the whole point is to always see it as a soap bubble?"},
-    {
-        'id': 52,
-        'author': "Charles Petzold",
-        'quote': "Programming in machine code is like eating with a toothpick."},
-    {
-        'id': 51,
-        'author': "William Barrett",
-        'quote': "The computer only gives back ourselves. It is a faithful mirror that reflects the human traits that are brought to it."},
-    {
-        'id': 50,
-        'author': "Steve Jobs",
-        'quote': "Details matter, it's worth waiting to get it right."},
-    {
         "author": "Edsger Dijkstra",
         "id": 49,
         "quote": "Computer science is no more about computers than astronomy is about telescopes."
+    },
+    {
+        'id': 58,
+        'author': "Edsger Dijkstra",
+        'quote': "The question of whether a computer can think is no more interesting than the question of whether a submarine can swim."
+    },
+    {
+        'id': 57,
+        'author': "Steve Jobs",
+        'quote': "Why join the navy if you can be a pirate?"
+    },
+    {
+        'id': 56,
+        'author': "Alan Kay",
+        'quote': "I don't know how many of you have ever met Dijkstra, but you probably know that arrogance in computer science is measured in nano-Dijkstras."
+    },
+    {
+        'id': 55,
+        'author': "C.A.R. Hoare",
+        'quote': "The most important property of a program is whether it accomplishes the intention of its user."
+    },
+    {
+        'id': 54,
+        'author': "Nick Black",
+        'quote': "...if you aren't, at any given time, scandalized by code you wrote five or even three years ago, you're not learning anywhere near enough"
+    },
+    {
+        'id': 53,
+        'author': "Alan Perlis",
+        'quote': "Is it possible that software is not like anything else, that it is meant to be discarded: that the whole point is to always see it as a soap bubble?"
+    },
+    {
+        'id': 52,
+        'author': "Charles Petzold",
+        'quote': "Programming in machine code is like eating with a toothpick."
+    },
+    {
+        'id': 51,
+        'author': "William Barrett",
+        'quote': "The computer only gives back ourselves. It is a faithful mirror that reflects the human traits that are brought to it."
+    },
+    {
+        'id': 50,
+        'author': "Steve Jobs",
+        'quote': "Details matter, it's worth waiting to get it right."
     },
     {
         'id': 48,
@@ -80,15 +89,18 @@ var csQuotes = [
     {
         'id': 47,
         'author': "Brendan Iribe",
-        'quote': "I like to think of it as this new field. Instead of computer science, it's going to be virtual science."},
+        'quote': "I like to think of it as this new field. Instead of computer science, it's going to be virtual science."
+    },
     {
         'id': 46,
         'author': "Sebastian Thrun",
-        'quote': "You could get an entire computer science education for free right now."},
+        'quote': "You could get an entire computer science education for free right now."
+    },
     {
         'id': 45,
         'author': "Alan Perlis",
-        'quote': "Computer Science is embarrassed by the computer."},
+        'quote': "Computer Science is embarrassed by the computer."
+    },
     {
         "author": "Bill Sempf",
         "id": 44,
