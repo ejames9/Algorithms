@@ -143,12 +143,12 @@ var csQuotes = [
         "quote": "Most software today is very much like an Egyptian pyramid with millions of bricks piled on top of each other, with no structural integrity, but just done by brute force and thousands of slaves.",
         "permalink": "http://quotes.stormconsultancy.co.uk/quotes/38"
     },
-    {
-        "author": "Larry DeLuca",
-        "id": 37,
-        "quote": "I’ve noticed lately that the paranoid fear of computers becoming intelligent and taking over the world has almost entirely disappeared from the common culture.  Near as I can tell, this coincides with the release of MS-DOS.",
-        "permalink": "http://quotes.stormconsultancy.co.uk/quotes/37"
-    },
+    // {
+    //     "author": "Larry DeLuca",
+    //     "id": 37,
+    //     "quote": "I’ve noticed lately that the paranoid fear of computers becoming intelligent and taking over the world has almost entirely disappeared from the common culture.  Near as I can tell, this coincides with the release of MS-DOS.",
+    //     "permalink": "http://quotes.stormconsultancy.co.uk/quotes/37"
+    // },
     {
         "author": "Henry Petroski",
         "id": 35,
@@ -305,12 +305,12 @@ var csQuotes = [
         "quote": "Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.",
         "permalink": "http://quotes.stormconsultancy.co.uk/quotes/9"
     },
-    {
-        "author": "Charles Babbage",
-        "id": 8,
-        "quote": "On two occasions I have been asked, ‘Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?’ I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.”",
-        "permalink": "http://quotes.stormconsultancy.co.uk/quotes/8"
-    },
+    // {
+    //     "author": "Charles Babbage",
+    //     "id": 8,
+    //     "quote": "On two occasions I have been asked, ‘Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?’ I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.”",
+    //     "permalink": "http://quotes.stormconsultancy.co.uk/quotes/8"
+    // },
     {
         "author": "Jon Ribbens",
         "id": 7,
