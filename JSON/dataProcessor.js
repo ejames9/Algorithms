@@ -62,7 +62,7 @@ const filterJSON =(json)=> ({
         'url': entry.stream.channel.url
       },
       'links': {
-        'self': entry.stream.links.self
+        'self': entry.stream._links.self
       }
     }
   }))
