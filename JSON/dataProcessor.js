@@ -55,14 +55,14 @@ const filterJSON =(json)=> ({
         'template': entry.stream.preview.template
       },
       'channel': {
-        'id': entry.channel._id,
-        'status': entry.channel.status,
-        'displayName': entry.channel.display_name,
-        'logo': entry.channel.logo,
-        'url': entry.channel.url
+        'id': entry.stream.channel._id,
+        'status': entry.stream.channel.status,
+        'displayName': entry.stream.channel.display_name,
+        'logo': entry.stream.channel.logo,
+        'url': entry.stream.channel.url
       },
       'links': {
-        'self': entry.links.self
+        'self': entry.stream.links.self
       }
     }
   }))
