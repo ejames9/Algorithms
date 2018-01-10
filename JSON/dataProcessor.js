@@ -41,7 +41,7 @@ const filterJSON =(json)=> ({
     'self': json._links.self,
     'next': json._links.next
   },
-  'featured': entry.map((entry)=> ({
+  'featured': json.featured.map((entry)=> ({
     'image': entry.image,
     'title': entry.title,
     'text': entry.text,
