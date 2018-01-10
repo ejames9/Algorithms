@@ -49,10 +49,10 @@ const filterJSON =(json)=> ({
       'id': json.featured._id,
       'game': json.featured.game,
       'preview': {
-        'small': json.featured.preview.small,
-        'medium': json.featured.preview.medium,
-        'large': json.featured.preview.large,
-        'template': json.featured.preview.template
+        'small': json.featured.stream.preview.small,
+        'medium': json.featured.stream.preview.medium,
+        'large': json.featured.stream.preview.large,
+        'template': json.featured.stream.preview.template
       }
     },
     'channel': {
