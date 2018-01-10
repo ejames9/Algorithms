@@ -41,29 +41,29 @@ const filterJSON =(json)=> ({
     'self': json._links.self,
     'next': json._links.next
   },
-  'featured': json.featured.map(()=> ({
-    'image': json.featured.image,
-    'title': json.featured.title,
-    'text': json.featured.text,
+  'featured': entry.map((entry)=> ({
+    'image': entry.image,
+    'title': entry.title,
+    'text': entry.text,
     'stream': {
-      'id': json.featured._id,
-      'game': json.featured.game,
+      'id': entry.stream._id,
+      'game': entry.stream.game,
       'preview': {
-        'small': json.featured.stream.preview.small,
-        'medium': json.featured.stream.preview.medium,
-        'large': json.featured.stream.preview.large,
-        'template': json.featured.stream.preview.template
+        'small': entry.stream.preview.small,
+        'medium': entry.stream.preview.medium,
+        'large': entry.stream.preview.large,
+        'template': entry.stream.preview.template
       }
     },
     'channel': {
-      'id': json.featured.channel._id,
-      'status': json.featured.channel.status,
-      'displayName': json.featured.channel.display_name,
-      'logo': json.featured.channel.logo,
-      'url': json.featured.channel.url
+      'id': entry.channel._id,
+      'status': entry.channel.status,
+      'displayName': entry.channel.display_name,
+      'logo': entry.channel.logo,
+      'url': entry.channel.url
     },
     'links': {
-      'self': json.featured.links.self
+      'self': entry.links.self
     }
   }))
 })
