@@ -53,17 +53,17 @@ const filterJSON =(json)=> ({
         'medium': entry.stream.preview.medium,
         'large': entry.stream.preview.large,
         'template': entry.stream.preview.template
+      },
+      'channel': {
+        'id': entry.channel._id,
+        'status': entry.channel.status,
+        'displayName': entry.channel.display_name,
+        'logo': entry.channel.logo,
+        'url': entry.channel.url
+      },
+      'links': {
+        'self': entry.links.self
       }
-    },
-    'channel': {
-      'id': entry.channel._id,
-      'status': entry.channel.status,
-      'displayName': entry.channel.display_name,
-      'logo': entry.channel.logo,
-      'url': entry.channel.url
-    },
-    'links': {
-      'self': entry.links.self
     }
   }))
 })
