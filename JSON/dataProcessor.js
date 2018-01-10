@@ -8,8 +8,10 @@ Eric James Foster, MIT license...
 */
 
 // API urls...
-const searchURL =()=> 'https://wind-bow.glitch.me/twitch-api/streams/'
-const featuredURL =()=> 'https://wind-bow.glitch.me/twitch-api/streams/featured/'
+const searchURL =()=>
+  'https://wind-bow.glitch.me/twitch-api/streams/'
+const featuredURL =()=>
+  'https://wind-bow.glitch.me/twitch-api/streams/featured/'
 
 // a Higher-Order function for piping smaller functions together
 // that operate on the same piece of data...
@@ -24,9 +26,9 @@ const pipe = (...funcs)=>
 // results in json format...
 const callAPI =(search=null)=>
   (search)?
-    xhr(url(searchURL, search))
+    xhr(url(searchURL(), search))
   :
-    xhr(featuredURL)
+    xhr(featuredURL())
 
 // A pure function that takes in raw stringy json and returns a json object...
 const parseJSON =(jsonString)=>
