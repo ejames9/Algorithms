@@ -37,7 +37,7 @@ const parseJSON =(jsonString)=>
 
 // A pure function that creates a new json object containing only the
 // fields we are interested in...
-const filterFeatureJSON =(json)=> ({
+const filterFeatureData =(json)=> ({
   'links': {
     'self': json._links.self,
     'next': json._links.next
@@ -65,13 +65,14 @@ const filterFeatureJSON =(json)=> ({
       'links': {
         'self': entry.stream._links.self
       }
-    }
+    },
+    'search': false
   }))
 })
 
 // A pure function that creates a new json object containing only the
 // fields we are interested in...
-const filterSearchJSON =(json)=> ({
+const filterSearchData =(json)=> (json.stream)? ({
   'stream': {
     'id': json.stream._id,
     'game': json.stream.game,
@@ -90,9 +91,10 @@ const filterSearchJSON =(json)=> ({
     },
     'links': {
       'self': json.stream._links.self
-    }
+    },
+    'search': true
   }
-})
+}) : json;
 
 // A Higher-Order function that uses the pipe function to compose
 // 3 smaller functions together that pass data to one another. If the
@@ -103,11 +105,11 @@ const obtainAndProcessData =(search=null)=>
     pipe(
       callAPI,
       parseJSON,
-      filterSearchJSON
+      filterSearchData
     )(search)
   :
     pipe(
       callAPI,
       parseJSON,
-      filterFeatureJSON
+      filterFeatureData
     )()
