@@ -7,6 +7,7 @@ twitch.tv api calls.
 Eric James Foster, MIT license...
 */
 
+
 // API urls...
 const searchURL =()=>
   'https://wind-bow.glitch.me/twitch-api/streams/'
@@ -36,7 +37,7 @@ const parseJSON =(jsonString)=>
 
 // A pure function that creates a new json object containing only the
 // fields we are interested in...
-const filterJSON =(json)=> ({
+const filterFeatureJSON =(json)=> ({
   'links': {
     'self': json._links.self,
     'next': json._links.next
@@ -68,13 +69,45 @@ const filterJSON =(json)=> ({
   }))
 })
 
+// A pure function that creates a new json object containing only the
+// fields we are interested in...
+const filterSearchJSON =(json)=> ({
+  'stream': {
+    'id': json.stream._id,
+    'game': json.stream.game,
+    'preview': {
+      'small': json.stream.preview.small,
+      'medium': json.stream.preview.medium,
+      'large': json.stream.preview.large,
+      'template': json.stream.preview.template
+    },
+    'channel': {
+      'id': json.stream.channel._id,
+      'status': json.stream.channel.status,
+      'displayName': json.stream.channel.display_name,
+      'logo': json.stream.channel.logo,
+      'url': json.stream.channel.url
+    },
+    'links': {
+      'self': json.stream._links.self
+    }
+  }
+})
+
 // A Higher-Order function that uses the pipe function to compose
 // 3 smaller functions together that pass data to one another. If the
 // function recieves an optional search parameter, a channel will be
 // searched. Otherwise, 25 featured results will be returned...
 const obtainAndProcessData =(search=null)=>
-  pipe(
-    callAPI,
-    parseJSON,
-    filterJSON
-  )(search)
+  (search)?
+    pipe(
+      callAPI,
+      parseJSON,
+      filterSearchJSON
+    )(search)
+  :
+    pipe(
+      callAPI,
+      parseJSON,
+      filterFeatureJSON
+    )()
