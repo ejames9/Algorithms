@@ -124,5 +124,5 @@ const obtainAndProcessData =(search=null)=>
       parseJSON,
       filterFeatureData,
       combine,
-      logData
+      logData(log)
     )()
