@@ -99,7 +99,7 @@ const filterSearchData =(json)=> (json.stream)? ({
 
 // Combine...
 const combine =(data)=> (
-  {...data, 'featured': [obtainAndProcessData('freecodecamp'), ...data.featured]}
+  {...data, 'featured': [...obtainAndProcessData('freecodecamp'), ...data.featured]}
 )
 
 // A Higher-Order function that uses the pipe function to compose
