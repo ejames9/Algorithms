@@ -102,9 +102,14 @@ const combine =(data)=> (
   {...data, 'featured': [...[obtainAndProcessData('freecodecamp')], ...data.featured]}
 )
 
-const logData =(logger)=>
+// A function for loggin data to a target...
+const dataLogger =(logger)=>
   (data)=>
     logger(data)
+
+// A function for logging data, but returning the unaltered data...
+// const logData =(data)=>
+//   inspect
 
 // A Higher-Order function that uses the pipe function to compose
 // 3 smaller functions together that pass data to one another. If the
@@ -116,8 +121,7 @@ const obtainAndProcessData =(search=null)=>
       callAPI,
       parseJSON,
       filterSearchData,
-      logData(log),
-      parseJSON
+      logData(inspect),
     )(search)
   :
     pipe(
@@ -125,6 +129,5 @@ const obtainAndProcessData =(search=null)=>
       parseJSON,
       filterFeatureData,
       combine,
-      logData(log),
-      parseJSON
+      logData(inspect),
     )()
