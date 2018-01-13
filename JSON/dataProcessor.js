@@ -102,6 +102,8 @@ const combine =(data)=> (
   {...data, 'featured': [...[obtainAndProcessData('freecodecamp')], ...data.featured]}
 )
 
+const logData =(data)=>
+  inspect(data)
 // A Higher-Order function that uses the pipe function to compose
 // 3 smaller functions together that pass data to one another. If the
 // function recieves an optional search parameter, a channel will be
@@ -118,5 +120,6 @@ const obtainAndProcessData =(search=null)=>
       callAPI,
       parseJSON,
       filterFeatureData,
-      combine
+      combine,
+      logData
     )()
