@@ -108,8 +108,10 @@ const dataLogger =(logger)=>
     logger(data)
 
 // A function for logging data, but returning the unaltered data...
-// const logData =(data)=>
-//   inspect
+const logData =(data)=> {
+  inspect(data)
+  return data;
+}
 
 // A Higher-Order function that uses the pipe function to compose
 // 3 smaller functions together that pass data to one another. If the
@@ -121,7 +123,7 @@ const obtainAndProcessData =(search=null)=>
       callAPI,
       parseJSON,
       filterSearchData,
-      dataLogger(inspect),
+      logData,
     )(search)
   :
     pipe(
@@ -129,5 +131,5 @@ const obtainAndProcessData =(search=null)=>
       parseJSON,
       filterFeatureData,
       combine,
-      dataLogger(inspect),
+      logData,
     )()
