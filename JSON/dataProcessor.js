@@ -121,7 +121,7 @@ const obtainAndProcessData =(search=null)=>
       callAPI,
       parseJSON,
       filterSearchData,
-      logData(inspect),
+      dataLogger(inspect),
     )(search)
   :
     pipe(
@@ -129,5 +129,5 @@ const obtainAndProcessData =(search=null)=>
       parseJSON,
       filterFeatureData,
       combine,
-      logData(inspect),
+      dataLogger(inspect),
     )()
