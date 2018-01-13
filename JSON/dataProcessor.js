@@ -42,6 +42,7 @@ const filterFeatureData =(json)=> ({
     'self': json._links.self,
     'next': json._links.next
   },
+  'search': false,
   'featured': json.featured.map((entry)=> ({
     'image': entry.image,
     'title': entry.title,
@@ -65,8 +66,7 @@ const filterFeatureData =(json)=> ({
       'links': {
         'self': entry.stream._links.self
       }
-    },
-    'search': false
+    }
   }))
 })
 
