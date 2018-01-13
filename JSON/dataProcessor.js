@@ -96,17 +96,10 @@ const filterSearchData =(json)=> (json.stream)? ({
   }
 }) : json
 
-// Function for searching the twitch.tv api for freeCodeCamp channel...
-const freeCodeCamp =()=>
-  pipe(
-    callAPI,
-    parseJSON,
-    filterSearchData
-  )('freeCodeCamp')
 
 // Combine...
 const combine =(data)=> (
-  {...data, featured: [freeCodeCamp(), ...data.featured]}
+  {...data, 'featured': [obtainAndProcessData('freecodecamp'), ...data.featured]}
 )
 
 // A Higher-Order function that uses the pipe function to compose
