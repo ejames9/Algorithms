@@ -26,8 +26,10 @@ const pipe = (...funcs)=>
 // A pure function that takes an optional search argument, and returns
 // results in json format...
 const callAPI =(search=null)=>
-  (search)?
+  (search)? (
+    log(url(searchURL(), search)),
     xhr(url(searchURL(), search))
+  )
   :
     xhr(featuredURL())
 
