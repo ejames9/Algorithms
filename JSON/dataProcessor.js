@@ -13,6 +13,8 @@ const searchURL =()=>
   'https://wind-bow.glitch.me/twitch-api/streams/'
 const featuredURL =()=>
   'https://wind-bow.glitch.me/twitch-api/streams/featured/'
+const freeCodeCampLogo =()=>
+  'https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png'
 
 // a Higher-Order function for piping smaller functions together
 // that operate on the same piece of data...
@@ -26,10 +28,8 @@ const pipe = (...funcs)=>
 // A pure function that takes an optional search argument, and returns
 // results in json format...
 const callAPI =(search=null)=>
-  (search)? (
-    log(url(searchURL(), search)),
+  (search)?
     xhr(url(searchURL(), search))
-  )
   :
     xhr(featuredURL())
 
@@ -100,8 +100,8 @@ const filterSearchData =(json)=> (json.stream)? ({
 
 
 // Combine...
-const combine =(data)=> (
-  {...data, 'featured': [...[obtainAndProcessData('freecodecamp')], ...data.featured]}
+const insertFreeCodeCamp =(data)=> (
+  {...data, 'featured': [...[{...obtainAndProcessData('freecodecamp'), 'logo': freeCodeCampLogo()}], ...data.featured]}
 )
 
 // A function for loggin data to a target...
@@ -132,6 +132,6 @@ const obtainAndProcessData =(search=null)=>
       callAPI,
       parseJSON,
       filterFeatureData,
-      combine,
+      insertFreeCodeCamp,
       logData
     )()
