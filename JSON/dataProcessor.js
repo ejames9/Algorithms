@@ -111,6 +111,7 @@ const dataLogger =(logger)=>
 
 // A function for logging data, but returning the unaltered data...
 const logData =(data)=> {
+  log('wtf, logged')
   inspect(data)
   return data;
 }
