@@ -98,11 +98,17 @@ const filterSearchData =(json)=> (json.stream)? ({
   }
 }) : json
 
-
 // Combine...
 const insertFreeCodeCamp =(data)=> (
   {...data, 'featured': [...[{...obtainAndProcessData('freecodecamp'), 'logo': freeCodeCampLogo()}], ...data.featured]}
 )
+
+// A higher-order function that combines featured results with either freeCodeCamp or Search Result...
+const insertSearchResult =(data)=>
+  (term)=> (term == 'freecodecamp')?
+    {...data, 'featured': [...[{...obtainAndProcessData(true), 'logo': freeCodeCampLogo()}], ...data.featured]}
+  :
+    {...data, 'featured': [...[obtainAndProcessData(true, term)], ...data.featured]}
 
 // A function for loggin data to a target...
 const dataLogger =(logger)=>
@@ -111,28 +117,61 @@ const dataLogger =(logger)=>
 
 // A function for logging data, but returning the unaltered data...
 const logData =(data)=> {
-  log('wtf, logged')
   inspect(data)
-  return data;
+  return data
 }
 
 // A Higher-Order function that uses the pipe function to compose
-// 3 smaller functions together that pass data to one another. If the
+// 4/5 smaller functions together that pass data to one another. If the
 // function recieves an optional search parameter, a channel will be
 // searched. Otherwise, 25 featured results will be returned...
-const obtainAndProcessData =(search=null)=>
+const obtainProcessAndCombineData =(search=false, term='freecodecamp')=>
   (search)?
     pipe(
       callAPI,
       parseJSON,
       filterSearchData,
       logData
-    )(search)
+    )(term)
   :
     pipe(
       callAPI,
       parseJSON,
       filterFeatureData,
-      insertFreeCodeCamp,
+      insertSearchResult(term),
       logData
     )()
+
+
+
+
+
+
+
+// // Component for displaying stream channels and data...
+// const Screen =({data, channel})=> {
+//   if (data) {
+//     if (data.search) {
+//       return (
+// // Component markup...
+//         <Channel data={data} channel={channel}/>
+//       )
+//     }
+//     else if (data.featured[channel].stream != null) {
+//       return (
+// // Component markup...
+//         <Channel data={data} channel={channel}/>
+//       )
+//     } else {
+//       return (
+// // Offline screen component...
+//        <Offline data={data.featured}/>
+//       )
+//     }
+//   } else {
+//     return (
+// // Offline screen component...
+//        <Offline />
+//     )
+//   }
+// }
