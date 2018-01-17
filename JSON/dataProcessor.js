@@ -15,6 +15,8 @@ const featuredURL =()=>
   'https://wind-bow.glitch.me/twitch-api/streams/featured/'
 const freeCodeCampLogo =()=>
   'https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png'
+const twitchTVLogo =()=>
+  'https://raw.githubusercontent.com/ejames9/Algorithms/master/Resources/twitchTVLogo.png'
 
 // a Higher-Order function for piping smaller functions together
 // that operate on the same piece of data...
@@ -112,7 +114,7 @@ const insertSearchResult =(term)=>
   :
     (
       log(term),
-    {...data, 'featured': [...[{...obtainProcessAndCombineData(true, term), 'logo': null}], ...data.featured]}
+    {...data, 'featured': [...[{...obtainProcessAndCombineData(true, term), 'logo': twitchTVLogo()}], ...data.featured]}
   )
 
 // A function for loggin data to a target...
