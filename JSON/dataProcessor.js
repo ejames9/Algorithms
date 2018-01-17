@@ -16,7 +16,7 @@ const featuredURL =()=>
 const freeCodeCampLogo =()=>
   'https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png'
 const twitchTVLogo =()=>
-  'https://raw.githubusercontent.com/ejames9/Algorithms/master/Resources/twitchTVLogo.png'
+  'https://raw.githubusercontent.com/ejames9/Algorithms/master/Resources/twitchTVLogoWhite.png'
 
 // a Higher-Order function for piping smaller functions together
 // that operate on the same piece of data...
