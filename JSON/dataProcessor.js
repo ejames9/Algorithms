@@ -105,10 +105,15 @@ const insertFreeCodeCamp =(data)=> (
 
 // A higher-order function that combines featured results with either freeCodeCamp or Search Result...
 const insertSearchResult =(data)=>
-  (term)=> (term == 'freecodecamp')?
+  (term)=> (term == 'freecodecamp')? (
+    log(term),
     {...data, 'featured': [...[{...obtainProcessAndCombineData(true), 'logo': freeCodeCampLogo()}], ...data.featured]}
+  )
   :
+    (
+      log(term),
     {...data, 'featured': [...[obtainProcessAndCombineData(true, term)], ...data.featured]}
+  )
 
 // A function for loggin data to a target...
 const dataLogger =(logger)=>
