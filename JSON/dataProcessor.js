@@ -102,19 +102,19 @@ const filterSearchData =(json)=> (json.stream)? ({
 
 // Combine...
 const insertFreeCodeCamp =(data)=> (
-  {...data, 'featured': [...[{...obtainAndProcessData('freecodecamp'), 'logo': freeCodeCampLogo()}], ...data.featured]}
+  {...data, 'featured': [...[{...obtainAndProcessData('freecodecamp'), 'logo': freeCodeCampLogo(), 'fCCamp': true}], ...data.featured]}
 )
 
 // A higher-order function that combines featured results with either freeCodeCamp or Search Result...
 const insertSearchResult =(term)=>
   (data)=> (term == 'freecodecamp')? (
     log(term),
-    {...data, 'featured': [...[{...obtainProcessAndCombineData(true), 'logo': freeCodeCampLogo()}], ...data.featured]}
+    {...data, 'featured': [...[{...obtainProcessAndCombineData(true), 'logo': freeCodeCampLogo(), 'fCCamp': true}], ...data.featured]}
   )
   :
     (
       log(term),
-    {...data, 'featured': [...[{...obtainProcessAndCombineData(true, term), 'logo': twitchTVLogo()}], ...data.featured]}
+    {...data, 'featured': [...[{...obtainProcessAndCombineData(true, term), 'logo': twitchTVLogo(), 'fCCamp': false}], ...data.featured]}
   )
 
 // A function for loggin data to a target...
