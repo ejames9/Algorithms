@@ -112,7 +112,7 @@ const insertSearchResult =(term)=>
   :
     (
       log(term),
-    {...data, 'featured': [...[obtainProcessAndCombineData(true, term)], ...data.featured]}
+    {...data, 'featured': [...[{...obtainProcessAndCombineData(true, term), 'logo': null}], ...data.featured]}
   )
 
 // A function for loggin data to a target...
