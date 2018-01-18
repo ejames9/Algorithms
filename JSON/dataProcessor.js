@@ -125,38 +125,70 @@ const insertFreeCodeCamp =(data)=> (
 )
 
 // An immutable higher-order function that combines featured results with either freeCodeCamp or Search Result...
+// const insertSearchResult =(term)=>
+//   (data)=>
+//     (term == 'freecodecamp')?
+//       {
+//       ...data,
+//         'featured': [
+//        ...[
+//             {
+//            ...obtainProcessAndCombineData(true),
+//               'logo': freeCodeCampLogo(),
+//               'channel': channelURL(),
+//               'fCCamp': true
+//             }
+//           ],
+//        ...data.featured
+//         ]
+//       }
+//     :
+//       {
+//       ...data,
+//         'featured': [
+//        ...[
+//             {
+//            ...obtainProcessAndCombineData(true, term),
+//               'logo': twitchTVLogo(),
+//               'channel': channelURL(term),
+//               'fCCamp': false
+//             }
+//           ],
+//        ...data.featured
+//         ]
+//       }
+
+
+// An immutable higher-order function that combines featured results with either freeCodeCamp or Search Result...
 const insertSearchResult =(term)=>
-  (data)=>
-    (term == 'freecodecamp')?
-      {
-      ...data,
-        'featured': [
-       ...[
-            {
-           ...obtainProcessAndCombineData(true),
-              'logo': freeCodeCampLogo(),
-              'channel': channelURL(),
-              'fCCamp': true
-            }
-          ],
-       ...data.featured
-        ]
-      }
-    :
-      {
-      ...data,
-        'featured': [
-       ...[
-            {
-           ...obtainProcessAndCombineData(true, term),
-              'logo': twitchTVLogo(),
-              'channel': channelURL(term),
-              'fCCamp': false
-            }
-          ],
-       ...data.featured
-        ]
-      }
+  (data)=> (
+    {
+    ...data,
+      'featured': [
+     ...[
+         (term == 'freecodecamp')?
+          {
+         ...obtainProcessAndCombineData(true),
+            'logo': freeCodeCampLogo(),
+            'channel': channelURL(),
+            'fCCamp': true
+          }
+        :
+          {
+         ...obtainProcessAndCombineData(true, term),
+            'logo': twitchTVLogo(),
+            'channel': channelURL(term),
+            'fCCamp': false
+          }
+        ],
+     ...data.featured
+      ]
+    }
+  )
+
+
+
+
 
 // A function for loggin data to a target...
 const dataLogger =(logger)=>
