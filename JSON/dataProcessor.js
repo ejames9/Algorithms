@@ -130,7 +130,7 @@ const insertSearchResult =(term)=>
     ...data,
       'featured': [
      ...[
-         applicableStreamObject()
+         applicableStreamObject(term)
         ],
      ...data.featured
       ]
