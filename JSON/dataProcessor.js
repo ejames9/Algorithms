@@ -106,58 +106,22 @@ const filterSearchData =(json)=> (json.stream)? ({
   }
 }) : json
 
-// Combine...
-const insertFreeCodeCamp =(data)=> (
-  {
- ...data,
-    'featured': [
-   ...[
-        {
-       ...obtainProcessAndCombineData(true),
-          'logo': freeCodeCampLogo(),
-          'channel': channelURL(),
-          'fCCamp': true
-        }
-      ],
-   ...data.featured
-    ]
-  }
-)
-
-// An immutable higher-order function that combines featured results with either freeCodeCamp or Search Result...
-// const insertSearchResult =(term)=>
-//   (data)=>
-//     (term == 'freecodecamp')?
-//       {
-//       ...data,
-//         'featured': [
-//        ...[
-//             {
-//            ...obtainProcessAndCombineData(true),
-//               'logo': freeCodeCampLogo(),
-//               'channel': channelURL(),
-//               'fCCamp': true
-//             }
-//           ],
-//        ...data.featured
-//         ]
-//       }
-//     :
-//       {
-//       ...data,
-//         'featured': [
-//        ...[
-//             {
-//            ...obtainProcessAndCombineData(true, term),
-//               'logo': twitchTVLogo(),
-//               'channel': channelURL(term),
-//               'fCCamp': false
-//             }
-//           ],
-//        ...data.featured
-//         ]
-//       }
-
+// Returns the applicable stream object based on the given search term...
+const applicableStreamObject =(term)=>
+  (term == 'freecodecamp')?
+    {
+  ...obtainProcessAndCombineData(true),
+     'logo': freeCodeCampLogo(),
+     'channel': channelURL(),
+     'fCCamp': true
+    }
+  :
+    {
+  ...obtainProcessAndCombineData(true, term),
+     'logo': twitchTVLogo(),
+     'channel': channelURL(term),
+     'fCCamp': false
+    }
 
 // An immutable higher-order function that combines featured results with either freeCodeCamp or Search Result...
 const insertSearchResult =(term)=>
@@ -166,36 +130,19 @@ const insertSearchResult =(term)=>
     ...data,
       'featured': [
      ...[
-         (term == 'freecodecamp')?
-          {
-         ...obtainProcessAndCombineData(true),
-            'logo': freeCodeCampLogo(),
-            'channel': channelURL(),
-            'fCCamp': true
-          }
-        :
-          {
-         ...obtainProcessAndCombineData(true, term),
-            'logo': twitchTVLogo(),
-            'channel': channelURL(term),
-            'fCCamp': false
-          }
+         applicableStreamObject()
         ],
      ...data.featured
       ]
     }
   )
 
-
-
-
-
-// A function for loggin data to a target...
+// A function for loggin data to a target with no side effects...
 const dataLogger =(logger)=>
   (data)=>
     logger(data)
 
-// A function for logging data, but returning the unaltered data...
+// A function for logging data as a side effect, but returning the unaltered data...
 const logData =(data)=> {
   inspect(data)
   return data
@@ -221,37 +168,3 @@ const obtainProcessAndCombineData =(search=false, term='freecodecamp')=>
       insertSearchResult(term),
       logData
     )()
-
-
-
-
-
-
-
-// // Component for displaying stream channels and data...
-// const Screen =({data, channel})=> {
-//   if (data) {
-//     if (data.search) {
-//       return (
-// // Component markup...
-//         <Channel data={data} channel={channel}/>
-//       )
-//     }
-//     else if (data.featured[channel].stream != null) {
-//       return (
-// // Component markup...
-//         <Channel data={data} channel={channel}/>
-//       )
-//     } else {
-//       return (
-// // Offline screen component...
-//        <Offline data={data.featured}/>
-//       )
-//     }
-//   } else {
-//     return (
-// // Offline screen component...
-//        <Offline />
-//     )
-//   }
-// }
