@@ -25,7 +25,7 @@ const channelURL =(term='freecodecamp')=>
   `https://www.twitch.tv/${term}`
 
 // A pure function for returning the remainder of `n1`/ n2...
-const n1ModuloN2 =(n1, n2)=>
+const wrapChannels =(n1, n2)=>
   (n1 + n2) % n2
 
 // a Higher-Order function for piping smaller functions together
