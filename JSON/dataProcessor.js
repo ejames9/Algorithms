@@ -7,12 +7,18 @@ twitch.tv api calls.
 Eric James Foster, MIT license...
 */
 
-
+// API Header...
+const header =()=>
+  'Client-ID: mzeaqltzr8oi6raze2nglw8phtu464'
+// Client id...
+const clientID =()=>
+  '?client_id=mzeaqltzr8oi6raze2nglw8phtu464'
 // API urls...
 const searchURL =()=>
-  'https://wind-bow.glitch.me/twitch-api/streams/'
+  'https://api.twitch.tv/kraken/streams/'
 const featuredURL =()=>
-  'https://wind-bow.glitch.me/twitch-api/streams/featured/'
+  'https://api.twitch.tv/kraken/streams/featured/'
+
 
 // Image urls..
 const freeCodeCampLogo =()=>
@@ -41,9 +47,9 @@ const pipe = (...funcs)=>
 // results in json format...
 const callAPI =(search=null)=>
   (search)?
-    xhr(url(searchURL(), search))
+    xhr(url(searchURL(), search, clientID()), {'header': header})
   :
-    xhr(featuredURL())
+    xhr(url(featuredURL(), clientID()), {'header': header})
 
 // A pure function that takes in raw stringy json and returns a json object...
 const parseJSON =(jsonString)=>
