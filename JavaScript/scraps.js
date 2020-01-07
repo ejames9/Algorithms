@@ -974,3 +974,27 @@
 //
 //       this._orderBreakpoint = orderBreakpointData[0]
 //       this._breakOrder  = orderBreakpointData[1]
+
+
+
+//
+//
+//
+// breakPoints = breakPoints.map(bPoint=> {
+//   switch (bPoint[0]) {
+//     case 576:
+//       return {sm: bPoint}
+//       break
+//     case 768:
+//       return {md: bPoint}
+//       break
+//     case 992:
+//       return {lg: bPoint}
+//       break
+//     case 1200:
+//       return {xl: bPoint}
+//       break
+//     default:
+//       return null
+//   }
+// })
